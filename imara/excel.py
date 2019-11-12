@@ -39,34 +39,17 @@ for row in range(3, 965):  # upto number of farmers
     if not accountNumber:
         accountNumber = 'N/A'
 
-    data = f"""                IMARA DAIRY FARMERS CO-OPERATIVE SOCIETY LTD\n
-                TEL 0722 823 667 / 0723 688 721 / 0725 168 913\n
+    data = f"""
+                                      IMARA DAIRY FARMERS CO-OPERATIVE SOCIETY LTD  *  TEL: 0722 823 667 / 0723 688 721 / 0725 168 913\n
 
-                MEMBER NUMBER: {number}\n
-                NAME: {name}\n
-                STATION: {station}\n
-                TOTAL KGS: {farmerData[0]}\n
-                RATE: {rate}\n
-                GROSS AMOUNT: {farmerData[1]}\n
-                PREVIOUS LOAN BALANCE: {farmerData[2]}\n
-                MONTHLY INSTALMENT: {farmerData[3]}\n
-                ACTUAL PAYMENT: {farmerData[4]}\n
-                LOAN BALANCE: {farmerData[5]}\n
-                STORE LOAN: {farmerData[6]}\n
-                ACTUAL STORE REPAYMENT: {farmerData[7]}\n
-                STORE LOAN BALANCE: {farmerData[8]}\n
-                PREVIOUS SAVINGS: {farmerData[9]}\n
-                MEMBER SAVINGS: {farmerData[10]}\n
-                TOTAL MEMBER SAVINGS: {farmerData[11]}\n
-                PREVIOUS REGISTRATION: {farmerData[12]}\n
-                TOTAL REGISTRATION: {farmerData[13]}\n
-                PREVIOUS SHARES: {farmerData[14]}\n
-                TOTAL SHARES: {farmerData[15]}\n
-                TOTAL DEDUCTIONS: {farmerData[16]}\n
-                NET PAY: {farmerData[17]}\n
-                BANK: {bank}\n
-                ACCOUNT NUMBER: {accountNumber}\n
- """  # Do not delete the space here, it serves an important role
+            MEMBER NUMBER: {number}   *    NAME: {name}   *    STATION: {station}   *    TOTAL KGS: {farmerData[0]}   *    RATE: {rate}   *    GROSS AMOUNT: {farmerData[1]}\n
+            PREVIOUS LOAN BALANCE: {farmerData[2]}   *    MONTHLY INSTALMENT: {farmerData[3]}   *    ACTUAL PAYMENT: {farmerData[4]}   *    LOAN BALANCE: {farmerData[5]}\n
+            STORE LOAN: {farmerData[6]}   *    ACTUAL STORE REPAYMENT: {farmerData[7]}   *    STORE LOAN BALANCE: {farmerData[8]}   *    PREVIOUS SAVINGS: {farmerData[9]}\n
+            MEMBER SAVINGS: {farmerData[10]}   *    TOTAL MEMBER SAVINGS: {farmerData[11]}   *    PREVIOUS REGISTRATION: {farmerData[12]}   *    TOTAL REGISTRATION: {farmerData[13]}\n
+            PREVIOUS SHARES: {farmerData[14]}   *    TOTAL SHARES: {farmerData[15]}   *    TOTAL DEDUCTIONS: {farmerData[16]}   *    NET PAY: {farmerData[17]}\n
+            BANK: {bank} |  ACCOUNT NUMBER: {accountNumber}\n
+
+ """  # noqa # Do not delete the space here, it serves an important role
 
     with open("payslips.txt", "a") as f:
         f.write(data)
