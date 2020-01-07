@@ -1,10 +1,10 @@
 {
     "files.autoSave": "afterDelay",
     "files.trimTrailingWhitespace": true,
-    "workbench.iconTheme": "vscode-icons",
+    "workbench.iconTheme": "Monokai Pro (Filter Machine) Icons",
     "git.autofetch": true,
     "editor.formatOnPaste": true,
-    "python.linting.pydocstyleEnabled": true,
+    "python.linting.flake8Enabled": true,
     "python.formatting.provider": "yapf",
     "editor.formatOnSave": true,
     "editor.rulers": [
@@ -21,4 +21,5 @@
         "**/__pycache__": true,
     },
     "terminal.integrated.shell.windows": "C:\\WINDOWS\\System32\\cmd.exe",
+    "workbench.colorTheme": "Monokai Pro (Filter Machine)",
 }
