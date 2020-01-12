@@ -1,11 +1,12 @@
 //+------------------------------------------------------------------+
-//|                                                     CloseAll.mq4 |
-//|                                                       CodersGuru |
-//|                                            http://www.xpworx.com |
+//|                                             Close_All.mq4 |
 //+------------------------------------------------------------------+
+#property copyright "Copyright � 2020, Lenny M Kioko."
+#property link      "https://lennykioko.github.io/"
 
-#property copyright "CodersGuru"
-#property link      "http://www.xpworx.com"
+//version 1.0
+
+//show input parameter
 #property show_inputs
 
 extern int option = 0;

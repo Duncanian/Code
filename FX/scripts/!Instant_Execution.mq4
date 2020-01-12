@@ -1,31 +1,33 @@
 //+------------------------------------------------------------------+
-//|                                             Buy_Contest_5_OP.mq4 |
+//|                                             Instant_Execution.mq4 |
 //+------------------------------------------------------------------+
-#property copyright "Copyright � 2010, eninefx."
-#property link      "http://www.kaskus.us/showthread.php?t=3967467&page=350"
+#property copyright "Copyright � 2020, Lenny M Kioko."
+#property link      "https://lennykioko.github.io/"
 
-//versi 2.0 - 25-mei-2010
+//version 1.0
 
-//munculkan parameter input
+//show input parameter
 #property show_inputs
 
 #include <stderror.mqh>
 #include <stdlib.mqh>
 
-//parameternya ini, input-nya ini
-extern int numOfOrders = 4;
+//external parameters to be provided
+extern string orderType = "";
+extern int numOfOrders = 5;
 extern string comment = "";
-extern double  totalLot = 3.00;
-// extern double  TP              = 10.0;  // Mute SL&TP
-// extern double  SL              = 10.0;  // Mute SL&TP
+extern double  totalLot = 2.00;
+// extern double  TP = 10.0;  // Mute SL&TP
+// extern double  SL = 10.0;  // Mute SL&TP
 
-double Lot = totalLot/numOfOrders;
+double lot = totalLot / numOfOrders;
+
 
 double Poin;
 //+------------------------------------------------------------------+
 //| Custom initialization function                                   |
 //+------------------------------------------------------------------+
-int init(){
+int init() {
 
    if (Point == 0.00001) Poin = 0.0001;
    else {
@@ -37,22 +39,25 @@ int init(){
 //+------------------------------------------------------------------+
 //                                                                   +
 //+------------------------------------------------------------------+
-int start()
-  {
+int start() {
    RefreshRates();
    while( IsTradeContextBusy() ) { Sleep(100); }
 //----
    while( numOfOrders > 0) {
-       int ticket = OrderSend(Symbol(),OP_BUY,Lot,Ask,3,0.000,0.000,comment,11,0,CLR_NONE);
-       if(ticket<1)
-       {
-           int error=GetLastError();
-           Print("Error = ",ErrorDescription(error));
-           return;
-        }
-        numOfOrders-=1;
+      if (orderType == "b") {
+         int ticket = OrderSend(Symbol(), OP_BUY, lot, Ask, 3, 0.000, 0.000, comment, 11, 0, CLR_NONE);
+      }
+      if (orderType == "s") {
+         ticket = OrderSend(Symbol(), OP_SELL, lot, Ask, 3, 0.000, 0.000, comment, 22, 0, CLR_NONE);
+      }
+      numOfOrders-=1;
+   }
+   if (ticket != numOfOrders) {
+      int error = GetLastError();
+      Print("Error = ", ErrorDescription(error));
+      return ticket - numOfOrders;
    }
 //----
    OrderPrint();
    return(0);
-  }
+}
