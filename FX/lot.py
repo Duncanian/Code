@@ -8,10 +8,10 @@ locale.setlocale(locale.LC_ALL, '')
 
 def calculate(loss, profit):
     risk_reward = round(profit / loss, 2)
-    # max_risk = 500  # Ksh 5,000
-    max_risk = 150  # Ksh 15,000
-    volume = round(max_risk / (loss * 10.5), 2)
-    print(f"---- \nR/R ratio: {risk_reward} | Max win: {(max_risk * risk_reward) * 100 :n} | Volume: {volume} \n----")  # noqa E501
+    max_risk = 50  # Ksh 5,000
+    raw_volume = max_risk / (loss * 10.0)
+    volume = round(raw_volume, 2)
+    print(f"---- \nR/R ratio: {risk_reward} | Max win: {(max_risk * risk_reward) * 100 :n} | Volume: {volume} ({raw_volume}) \n----")  # noqa E501
 
 
 if __name__ == "__main__":
