@@ -3,7 +3,7 @@
 //|                                 Copyright © 2020, FX Masterminds |
 //|                                   https://lennykioko.github.io/" |
 //+------------------------------------------------------------------+
-#property copyright "Copyright � 2020, Lenny M Kioko."
+#property copyright "Copyright � 2020, FX Masterminds."
 #property link      "https://lennykioko.github.io/"
 
 //version 1.0
@@ -26,7 +26,7 @@ int start()
       int ordertotal = OrdersTotal();
       for (int i=0; i<ordertotal; i++)
       {
-         int order = OrderSelect(i, SELECT_BY_POS);
+         int order = OrderSelect(i, SELECT_BY_POS,MODE_TRADES);
          if (OrderSymbol() == Symbol())
             if (OrderComment() == comment)
             {
