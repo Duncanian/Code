@@ -18,6 +18,14 @@ extern int numOfOrders = 5;
 extern double orderPrice = 0.00;
 extern string comment = "";
 extern double  totalLot = 0.01;
+
+enum e_type{
+ pips=1,
+ price=2,
+};
+
+input e_type  type = pips;
+
 extern double sl = 0;
 extern double tp = 0;
 
@@ -31,6 +39,7 @@ double Poin;
 int init() {
 
    if (Point == 0.00001) Poin = 0.0001;
+   if (Point == 0.01) Poin = 0.1;
    else {
       if (Point == 0.001) Poin = 0.01;
       else Poin = Point;
@@ -43,7 +52,12 @@ int init() {
 
 int start() {
    Execute();
-   Modify();
+   if (type == 1) {
+      ModifyPips();
+   }
+   if (type == 2) {
+      ModifyPrice();
+   }
    return(0);
 }
 
@@ -71,16 +85,38 @@ int Execute() {
    return(0);
 }
 
-int Modify() {
+int ModifyPips() {
 //----
    int ordertotal = OrdersTotal();
    for (int i=0; i<ordertotal; i++)
    {
-      int order = OrderSelect(i, SELECT_BY_POS,MODE_TRADES);
+      int order = OrderSelect(i, SELECT_BY_POS, MODE_TRADES);
+      if (OrderSymbol() == Symbol())
+         if (OrderComment() == comment && (OrderType()==OP_BUY || OrderType()==OP_BUYSTOP))
+         {
+            int ticket = OrderModify(OrderTicket(), OrderOpenPrice(), OrderOpenPrice()-sl*Poin, OrderOpenPrice()+tp*Poin, 0);
+         }
+
+         if (OrderComment() == comment && (OrderType()==OP_SELL || OrderType()==OP_SELLSTOP))
+         {
+            int ticket2 = OrderModify(OrderTicket(), OrderOpenPrice(), OrderOpenPrice()+sl*Poin, OrderOpenPrice()-tp*Poin, 0);
+         }
+      }
+//----
+return(0);
+}
+
+
+int ModifyPrice() {
+//----
+   int ordertotal = OrdersTotal();
+   for (int i=0; i<ordertotal; i++)
+   {
+      int order = OrderSelect(i, SELECT_BY_POS, MODE_TRADES);
       if (OrderSymbol() == Symbol())
          if (OrderComment() == comment)
          {
-            int ticket = OrderModify(OrderTicket(), OrderOpenPrice(), sl, tp, 0);
+            int ticket3 = OrderModify(OrderTicket(), OrderOpenPrice(), sl, tp, 0);
          }
       }
 //----

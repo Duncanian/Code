@@ -31,6 +31,7 @@ double Poin;
 int init() {
 
    if (Point == 0.00001) Poin = 0.0001;
+   if (Point == 0.01) Poin = 0.1;
    else {
       if (Point == 0.001) Poin = 0.01;
       else Poin = Point;
@@ -59,12 +60,12 @@ int ModifyPips() {
    {
       int order = OrderSelect(i, SELECT_BY_POS, MODE_TRADES);
       if (OrderSymbol() == Symbol())
-         if (OrderComment() == comment && OrderType()==OP_BUY || OrderType()==OP_BUYSTOP)
+         if (OrderComment() == comment && (OrderType()==OP_BUY || OrderType()==OP_BUYSTOP))
          {
             int ticket = OrderModify(OrderTicket(), OrderOpenPrice(), OrderOpenPrice()-sl*Poin, OrderOpenPrice()+tp*Poin, 0);
          }
 
-         if (OrderComment() == comment && OrderType()==OP_SELL || OrderType()==OP_SELLSTOP)
+         if (OrderComment() == comment && (OrderType()==OP_SELL || OrderType()==OP_SELLSTOP))
          {
             int ticket2 = OrderModify(OrderTicket(), OrderOpenPrice(), OrderOpenPrice()+sl*Poin, OrderOpenPrice()-tp*Poin, 0);
          }
@@ -83,7 +84,7 @@ int ModifyPrice() {
       if (OrderSymbol() == Symbol())
          if (OrderComment() == comment)
          {
-            OrderModify(OrderTicket(), OrderOpenPrice(), sl, tp, 0);
+            int ticket3 = OrderModify(OrderTicket(), OrderOpenPrice(), sl, tp, 0);
          }
       }
 //----
