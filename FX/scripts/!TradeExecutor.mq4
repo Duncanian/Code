@@ -1,7 +1,7 @@
 //+------------------------------------------------------------------+
 //|                                             Instant_Execution.mq4 |
 //+------------------------------------------------------------------+
-#property copyright "Copyright � 2020, Lenny M Kioko."
+#property copyright "Copyright � 2020, FX Masterminds."
 #property link      "https://lennykioko.github.io/"
 
 //version 1.0
@@ -30,12 +30,12 @@ extern double  totalLot = 0.01;
 extern double PendingOrderPrice = 0.00;
 
 
-enum e_type{
+enum e_Sl_Tp_Type{
  Pips=1,
  Price=2,
 };
 
-input e_type  type = Pips;
+input e_Sl_Tp_Type  Sl_Tp_Type = Pips;
 
 
 extern double sl = 0;
@@ -76,13 +76,12 @@ int start() {
    if (orderType == 4) {
       PendingSell();
    }
-
 //+------------------------------------------------------------------+
 
-   if (type == 1) {
+   if (Sl_Tp_Type == 1) {
       ModifyPips();
    }
-   if (type == 2) {
+   if (Sl_Tp_Type == 2) {
       ModifyPrice();
    }
    return(0);
