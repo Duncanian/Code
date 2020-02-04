@@ -17,9 +17,9 @@ extern string orderType = "";
 extern int numOfOrders = 5;
 extern double orderPrice = 0.00;
 extern string comment = "";
-extern double  totalLot = 2.00;
-// extern double  TP = 10.0;  // Mute SL&TP
-// extern double  SL = 10.0;  // Mute SL&TP
+extern double  totalLot = 0.01;
+extern double sl = 0;
+extern double tp = 0;
 
 double lot = totalLot / numOfOrders;
 
@@ -40,7 +40,14 @@ int init() {
 //+------------------------------------------------------------------+
 //                                                                   +
 //+------------------------------------------------------------------+
+
 int start() {
+   Execute();
+   Modify();
+   return(0);
+}
+
+int Execute() {
    RefreshRates();
    while( IsTradeContextBusy() ) { Sleep(100); }
 //----
@@ -58,10 +65,28 @@ int start() {
       Print("Error = ", ErrorDescription(error));
       return ticket - numOfOrders;
    }
+
 //----
    OrderPrint();
    return(0);
 }
+
+int Modify() {
+//----
+   int ordertotal = OrdersTotal();
+   for (int i=0; i<ordertotal; i++)
+   {
+      int order = OrderSelect(i, SELECT_BY_POS,MODE_TRADES);
+      if (OrderSymbol() == Symbol())
+         if (OrderComment() == comment)
+         {
+            int ticket = OrderModify(OrderTicket(), OrderOpenPrice(), sl, tp, 0);
+         }
+      }
+//----
+return(0);
+}
+
 
 // odersend() params
 //  Sym,                    // Symbol

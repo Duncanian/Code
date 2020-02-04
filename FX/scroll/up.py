@@ -1,4 +1,4 @@
 import pyautogui
 
 while True:
-    pyautogui.scroll(25)
+    pyautogui.scroll(100)
